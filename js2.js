@@ -42,6 +42,7 @@ window.onload = function () {
   $(".bl-cross").on('click', function () {
     //   //alert('Clicked');
        remove(this);
+
     });
 
   
@@ -56,7 +57,8 @@ function loadContent() {
 }
 function remove(button) {
   //var name = $(button).closest(".bl-product").find(".nameOfRow ").text();
-  $(button).closest(".bl-product-container-list").remove();
+  $(button).closest(".my-buy-list-container").remove();
+
 }
 // function add(){
 //   $(".bl-container".append(document.show.RowTemplate))
@@ -107,6 +109,7 @@ function minusProduct(button) {
 
 // }
 function addItem(name,id){
+  var counter =0;
   var product_on_the_left = $("#1").clone(true);
   product_on_the_left.find(".nameOfRow").find("input").val(name);
   $(".bl-container").append(product_on_the_left);
@@ -117,6 +120,9 @@ function addItem(name,id){
         product_on_the_right.find("div").html(name);
         product_on_the_right.css("display", "flex");
         product_on_the_right.attr("id", id + "buy");
+  let circle = $(".my-circle-block-in-buy-list");
+        circle.find("span").html(counter++);
+        product_on_the_right.find("my-circle-block-in-buy-list").text(counter++);
         $("#left").append(product_on_the_right);
         
         
@@ -131,4 +137,7 @@ $(".bl-minus").click(function () {
        });
 
 } 
-  
+function buyProduct(name){
+var boughtList = document.getElementById("bought");
+
+}
