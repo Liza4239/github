@@ -1,11 +1,9 @@
 package myPackage;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
 public class Task {
     int capacity = 5;
     // initial list of strings
@@ -13,26 +11,19 @@ public class Task {
     // reverse list of strings
     ArrayList<String> newReverseList = new ArrayList<String>(capacity);
     // result list
-    ArrayList<String> outputList = new ArrayList<String>(capacity);
+    ArrayList<Integer> outputList = new ArrayList<Integer>(capacity);
+    //ArrayList<Integer> finalList = new ArrayList<Integer>(capacity);
     int min = 1;
     int max = 8;
     public static void main(String[] args) throws IOException {
 	// write your code here
 
-
-
-
         Task t = new Task();
         t.generateAndFillList();
         t.fillReverseList();
+        t.convertToInteger();
         t.fillResultList();
         t.writeToFile();
-
-
-
-
-
-
 
     }
 // This method  generates numbers in range from 1 to 8, fills array and returns it.
@@ -66,10 +57,18 @@ public class Task {
         }
         return list;
     }
-    public ArrayList<String> fillResultList(){
-        for(int i=0; i<capacity-1; i++){
+    public ArrayList<Integer> convertToInteger(){
+        for(int i=0; i<capacity; i++){
             int num = Integer.parseInt(newReverseList.get(i));
-            outputList.add(num+newReverseList.get(i+1));
+            outputList.add(num);
+            //System.out.println(outputList.get(i));
+        }
+        return outputList;
+    }
+    public ArrayList<Integer> fillResultList(){
+        for(int i=0; i<capacity-1; i++){
+            int sum = outputList.get(i) + outputList.get(i+1);
+            outputList.set(i,sum);
             System.out.println(outputList.get(i));
         }
         return outputList;
@@ -89,7 +88,7 @@ public class Task {
     public void writeToFile() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter("src/myPackage/result.txt"));
         for(int i=0; i<capacity-1; i++){
-            writer.write(outputList.get(i));
+            writer.write(Integer.toString(outputList.get(i)));
             writer.newLine();
         }
         writer.flush();
